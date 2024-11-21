@@ -12,7 +12,7 @@ module Customizable
   end
 
   def get_custom_attribute(name)
-    custom_attributes.find_by(attribute_name: name)
+    custom_attributes.find_by(attribute_name: name)&.attribute_value
   end
 
   def all_custom_attributes
@@ -22,7 +22,7 @@ module Customizable
   end
 
   def delete_custom_attribute(name)
-    attribute = get_custom_attribute(name)
+    attribute = custom_attributes.find_by(attribute_name: get_custom_attribute(name))
     attribute.destroy
   end
 
