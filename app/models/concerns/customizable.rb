@@ -7,7 +7,7 @@ module Customizable
 
   def set_custom_attributes(name, value)
     attribute = custom_attributes.find_or_initialize_by(attribute_name: name)
-    attribute.attribue_value = value
+    attribute.attribute_value = value
     attribute.save
   end
 
@@ -15,10 +15,15 @@ module Customizable
     custom_attributes.find_by(attribute_name: name)
   end
 
-  def custom_attributes
+  def all_custom_attributes
     custom_attributes.each_with_object({}) do |attr, hash|
-      hash[attr.key] = attr.value
+      hash[attr.attribute_name] = attr.attribute_value
     end
+  end
+
+  def delete_custom_attribute(name)
+    attribute = get_custom_attribute(name)
+    attribute.destroy
   end
 
 end
