@@ -18,10 +18,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_21_071225) do
   end
 
   create_table "custom_attributes", force: :cascade do |t|
-    t.string "attribute_name"
-    t.string "attribute_value"
-    t.string "customizable_type"
-    t.integer "customizable_id"
+    t.string "attribute_name", null: false
+    t.string "attribute_value", null: false
+    t.string "customizable_type", null: false
+    t.integer "customizable_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["customizable_type", "customizable_id"], name: "index_custom_attributes_on_customizable"
