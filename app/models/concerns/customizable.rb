@@ -5,6 +5,10 @@ module Customizable
     has_many :custom_attributes, as: :customizable
   end
 
+  def find_by_name(name)
+    custom_attributes.find_by(attribute_name: name)
+  end
+
   def set_custom_attributes(name, value)
     attribute = custom_attributes.find_or_initialize_by(attribute_name: name)
     attribute.attribute_value = value
@@ -12,7 +16,7 @@ module Customizable
   end
 
   def get_custom_attribute(name)
-    custom_attributes.find_by(attribute_name: name)&.attribute_value
+    find_by_name(name)&.attribute_value
   end
 
   def all_custom_attributes
@@ -22,8 +26,8 @@ module Customizable
   end
 
   def delete_custom_attribute(name)
-    attribute = custom_attributes.find_by(attribute_name: get_custom_attribute(name))
-    attribute.destroy
+    attribute = find_by_name(name)
+    attribute&.destroy
   end
 
 end
